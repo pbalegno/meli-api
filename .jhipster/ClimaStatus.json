@@ -1,0 +1,24 @@
+{
+    "name": "ClimaStatus",
+    "fields": [
+        {
+            "fieldName": "codigoStatus",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "valor",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190611143955",
+    "entityTableName": "clima_status",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "SolrSysApi",
+    "applications": "*",
+    "microserviceName": "SolrSysApi"
+}

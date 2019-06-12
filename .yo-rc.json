@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.meli.solr.api"
+    },
+    "jhipsterVersion": "6.0.1",
+    "applicationType": "microservice",
+    "baseName": "SolrSysApi",
+    "packageName": "com.meli.solr.api",
+    "packageFolder": "com/meli/solr/api",
+    "serverPort": "8888",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "h2Disk",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": true,
+    "jwtSecretKey": "NzNhOTRhZmJlYzBlODFkYTMzYmU2M2U3ODAwNGVkMzZjNWIzNTI0ODBjYjQ0YTBlM2M0ZDg1Yjc4ZGEwNzdjYmU3YzZkYTdkNGQzODQzMzNmODJiOGNlZTZkNjhmNjk4MGUzYTc0ODU5YmU0ZDA3MDY0NTMyZGM4NTJkZGI1NDE=",
+    "testFrameworks": [
+      "gatling",
+      "cucumber"
+    ],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

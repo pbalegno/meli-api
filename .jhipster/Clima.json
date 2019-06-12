@@ -1,0 +1,24 @@
+{
+    "name": "Clima",
+    "fields": [
+        {
+            "fieldName": "dia",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "codigoClima",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190611143954",
+    "entityTableName": "clima",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "SolrSysApi",
+    "applications": "*",
+    "microserviceName": "SolrSysApi"
+}
