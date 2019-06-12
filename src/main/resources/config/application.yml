@@ -77,7 +77,7 @@ management:
 
 spring:
   application:
-    name: SolrSysApi
+    name: solr-sys
   profiles:
     # The commented value for `active` can be replaced with valid Spring profiles to load.
     # Otherwise, it will be filled in by maven when building the JAR file
@@ -121,7 +121,7 @@ spring:
 
 server:
   servlet:
-    context-path: /services/${spring.application.name}
+    context-path: /${spring.application.name}
     session:
       cookie:
         http-only: true
@@ -156,9 +156,9 @@ jhipster:
     description: SolrSysApi API documentation
     version: 0.0.1
     terms-of-service-url:
-    contact-name:
+    contact-name: Lic. Pablo Balegno
     contact-url:
-    contact-email:
+    contact-email: pablobalegno@gmail.com
     license:
     license-url:
 # ===================================================================

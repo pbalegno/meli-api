@@ -39,7 +39,7 @@ spring:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:h2:file:./target/h2db/db/solrsysapi;DB_CLOSE_DELAY=-1
     username: SolrSysApi
-    password:
+    password: meli2019
     hikari:
       poolName: Hikari
       auto-commit: false
