@@ -88,9 +88,7 @@ Donwload docker-compose.yml from [public Git repo][]
     
 On local, create a folder "meli" and then, run:
 
-
 	docker-compose up -d    
-
     
 [site Jib]: https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin
 
