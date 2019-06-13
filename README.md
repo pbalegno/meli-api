@@ -82,16 +82,17 @@ And then run:
     
 For more information about Jib see [site Jib][]    
     
-## Deployment on local
+## Deployment
 
-
-Run the docker-compose for deploy :
-
-    docker pull pablobalegno/solrsysapi:latest
+Donwload docker-compose.yml from [public Git repo][]
     
-And then, run:
+On local, create a folder "meli" and then, run:
 
-	docker-compose -f docker-compose.yml up -d    
+	```
+	docker-compose up -d    
+ 	```
     
 [site Jib]: https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin
+
+[public Git repo]: https://github.com/pbalegno/meli-api/blob/master/src/main/docker/docker-compose.yml
    
