@@ -33,6 +33,15 @@
     "enableTranslation": false,
     "clientPackageManager": "npm",
     "skipClient": true,
-    "skipUserManagement": true
+    "skipUserManagement": true,
+    "appsFolders": [
+      "meli-solr-sys-api"
+    ],
+    "directoryPath": "../",
+    "gatewayType": "traefik",
+    "monitoring": "elk",
+    "consoleOptions": [
+      "curator"
+    ]
   }
 }

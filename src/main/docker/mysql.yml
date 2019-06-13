@@ -1,12 +1,11 @@
 version: '2'
 services:
   solrsysapi-mysql:
-    image: mysql:8.0.16
-    # volumes:
-    #     - ~/volumes/jhipster/SolrSysApi/mysql/:/var/lib/mysql/
+    image: mysql:5.7.26
+    volumes:
+        - ~/volumes/SolrSysApi/mysql/:/var/lib/mysql/
     environment:
-      - MYSQL_USER=root
-      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_ROOT_PASSWORD=meli2019
       - MYSQL_DATABASE=solrsysapi
     ports:
       - 3306:3306
