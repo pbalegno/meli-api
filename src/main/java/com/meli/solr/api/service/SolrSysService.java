@@ -6,12 +6,8 @@ import com.meli.solr.api.domain.enumeration.WeatherType;
 
 public interface SolrSysService {
 
-	
-	 void init() ;
+	void init();
 
-	Map<WeatherType,Integer> getReport();
-	
-	
-
+	Map<WeatherType, Integer> getReport();
 
 }

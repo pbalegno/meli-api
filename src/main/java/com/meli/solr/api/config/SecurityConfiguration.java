@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
-import com.meli.solr.api.security.jwt.JWTConfigurer;
 import com.meli.solr.api.security.jwt.TokenProvider;
 
 @EnableWebSecurity
@@ -31,8 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring()
             .antMatchers(HttpMethod.OPTIONS, "/**")
             .antMatchers("/h2-console/**")
-            .antMatchers("/swagger-ui/index.html")
-            .antMatchers("/test/**");
+            .antMatchers("/swagger-ui/index.html");
     }
 
     @Override
@@ -55,17 +53,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
 //            .antMatchers("/api/authenticate").permitAll()
 //            .antMatchers("/api/**").authenticated()
-            .antMatchers("/api/**").permitAll()
-//            .antMatchers("/management/health").permitAll()
-//            .antMatchers("/management/info").permitAll()
-//            .antMatchers("/management/prometheus").permitAll()
-//            .antMatchers("/management/**").hasAuthority(AuthoritiesConstants.ADMIN)
-        .and()
-            .apply(securityConfigurerAdapter());
+            .antMatchers("/api/**").permitAll();
+//        .and()
+//            .apply(securityConfigurerAdapter());
         // @formatter:on
     }
 
-    private JWTConfigurer securityConfigurerAdapter() {
-        return new JWTConfigurer(tokenProvider);
-    }
+//  Jhipster defaul JWT
+//    private JWTConfigurer securityConfigurerAdapter() {
+//        return new JWTConfigurer(tokenProvider);
+//    }
 }

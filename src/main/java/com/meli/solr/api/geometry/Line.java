@@ -1,6 +1,6 @@
-package com.meli.solr.api.geo;
+package com.meli.solr.api.geometry;
 
-import static com.meli.solr.api.geo.GeoUtils.*;
+import static com.meli.solr.api.geometry.GeoUtils.*;
 
 import org.springframework.data.geo.Point;
 

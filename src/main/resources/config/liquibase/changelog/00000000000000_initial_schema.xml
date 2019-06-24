@@ -1,72 +1,35 @@
-<?xml version="1.0" encoding="utf-8"?>
-<databaseChangeLog
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-
-    <property name="autoIncrement" value="true"/>
-
-    <!--
-        JHipster core tables.
-        The initial schema has the '00000000000001' id, so that it is over-written if we re-generate it.
-    -->
-    <changeSet id="00000000000001" author="jhipster">
-        <createTable tableName="jhi_persistent_audit_event">
-            <column name="event_id" type="bigint" autoIncrement="${autoIncrement}">
-                <constraints primaryKey="true" nullable="false"/>
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="Pablo (generated)" id="1561410393253-3">
+        <createTable tableName="LOCATION">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="PK_LOCATION"/>
             </column>
-            <column name="principal" type="varchar(50)">
-                <constraints nullable="false" />
-            </column>
-            <column name="event_date" type="timestamp"/>
-            <column name="event_type" type="varchar(255)"/>
-        </createTable>
-
-        <createTable tableName="jhi_persistent_audit_evt_data">
-            <column name="event_id" type="bigint">
+            <column name="X" type="DOUBLE(17)"/>
+            <column name="Y" type="DOUBLE(17)"/>
+            <column name="PLANET" type="VARCHAR(255)"/>
+            <column name="CREATED_BY" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="varchar(150)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="value" type="varchar(255)"/>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(50)"/>
+            <column name="LAST_MODIFIED_DATE" type="TIMESTAMP"/>
         </createTable>
-        <addPrimaryKey columnNames="event_id, name" tableName="jhi_persistent_audit_evt_data"/>
-
-        <createIndex indexName="idx_persistent_audit_event"
-                     tableName="jhi_persistent_audit_event"
-                     unique="false">
-            <column name="principal" type="varchar(50)"/>
-            <column name="event_date" type="timestamp"/>
-        </createIndex>
-
-        <createIndex indexName="idx_persistent_audit_evt_data"
-                     tableName="jhi_persistent_audit_evt_data"
-                     unique="false">
-            <column name="event_id" type="bigint"/>
-        </createIndex>
-
-        <addForeignKeyConstraint baseColumnNames="event_id"
-                                 baseTableName="jhi_persistent_audit_evt_data"
-                                 constraintName="fk_evt_pers_audit_evt_data"
-                                 referencedColumnNames="event_id"
-                                 referencedTableName="jhi_persistent_audit_event"/>
     </changeSet>
-
-    <changeSet author="jhipster" id="00000000000002" context="test">
-        <createTable tableName="jhi_date_time_wrapper">
-            <column autoIncrement="${autoIncrement}" name="id" type="BIGINT">
-                <constraints primaryKey="true" primaryKeyName="jhi_date_time_wrapperPK"/>
+    <changeSet author="Pablo (generated)" id="1561410393253-4">
+        <createTable tableName="MEASURE">
+         
+            <column name="DAY" type="INT">
+            	<constraints primaryKey="true" primaryKeyName="PK_MEASURE"/>
             </column>
-            <column name="instant" type="timestamp"/>
-            <column name="local_date_time" type="timestamp"/>
-            <column name="offset_date_time" type="timestamp"/>
-            <column name="zoned_date_time" type="timestamp"/>
-            <column name="local_time" type="time"/>
-            <column name="offset_time" type="time"/>
-            <column name="local_date" type="date"/>
+            <column name="WEATHER" type="VARCHAR(255)"/>
+            <column name="CREATED_BY" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(50)"/>
+            <column name="LAST_MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="DAY_MOD" type="INT"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

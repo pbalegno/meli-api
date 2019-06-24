@@ -18,9 +18,9 @@ import com.meli.solr.api.domain.Measure;
 import com.meli.solr.api.domain.Planet;
 import com.meli.solr.api.domain.enumeration.PlanetType;
 import com.meli.solr.api.domain.enumeration.WeatherType;
-import com.meli.solr.api.geo.Line;
-import com.meli.solr.api.geo.Shape;
-import com.meli.solr.api.geo.Triangle;
+import com.meli.solr.api.geometry.Line;
+import com.meli.solr.api.geometry.Shape;
+import com.meli.solr.api.geometry.Triangle;
 import com.meli.solr.api.service.ForecastService;
 import com.meli.solr.api.service.LocationService;
 
@@ -33,17 +33,16 @@ public class ForecastServiceImpl implements ForecastService {
 
 	@Autowired
 	private LocationService locationService;
+	
 	private final Logger log = LoggerFactory.getLogger(ForecastServiceImpl.class);
-	private static List<Planet> planets;
+	private static List<Planet> planets = new ArrayList<>();
 	static {
-		planets = new ArrayList<>();
 		planets.add(new Planet(PlanetType.Betasoide));
 		planets.add(new Planet(PlanetType.Ferengi));
 		planets.add(new Planet(PlanetType.Vulcano));
 	}
 	
-//	private Integer HEAVY_RAIN_MAX_DAY = 0;
-	private double HEAVY_RAIN_MAX_PER = 0;//6305.665563341552;
+	private double HEAVY_RAIN_MAX_PER = 0;
 
 	public Measure getMeasure(Integer day) {
 		log.debug("Getting measure for day: {}", day);
@@ -77,7 +76,6 @@ public class ForecastServiceImpl implements ForecastService {
 			//Heavy rain when the perimeter of the triangle is at its maximum
 			if (perimeter > HEAVY_RAIN_MAX_PER) {
 				HEAVY_RAIN_MAX_PER = perimeter;
-//				HEAVY_RAIN_MAX_DAY = day;
 				measure.setWeather(WeatherType.HeavyRain);
 				return measure;
 			}
@@ -90,18 +88,14 @@ public class ForecastServiceImpl implements ForecastService {
 		
 	}
 
-	
 	public Map<PlanetType, Point> resolvePoints(Integer day) {
 		Map<PlanetType, Point> points = new HashMap<>();
-		
 		planets.stream().forEach(p-> {
 			Point point = p.getPoint(day);
 			Location location = createLocation(p, point);
 			locationService.save(location);
 			points.put(p.getPlanet(), point);
 		});
-	
-
 		return points;
 	}
 
@@ -112,11 +106,6 @@ public class ForecastServiceImpl implements ForecastService {
 		location.setY(point.getY());
 		return location;
 	}
-
-
-//	public Integer getHeavyRainMaxDay() {
-//		return HEAVY_RAIN_MAX_DAY;
-//	}
 
 	
 }

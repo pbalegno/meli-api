@@ -1,6 +1,6 @@
-package com.meli.solr.api.geo;
+package com.meli.solr.api.geometry;
 
-import static com.meli.solr.api.geo.GeoUtils.distance;
+import static com.meli.solr.api.geometry.GeoUtils.distance;
 
 import org.springframework.data.geo.Point;
 

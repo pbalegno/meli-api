@@ -1,0 +1,25 @@
+{
+    "name": "Measure",
+    "fields": [
+        {
+            "fieldName": "day",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "weather",
+            "fieldType": "Weather",
+            "fieldValues": "Drought,OptimalTemperature,Rain,HeavyRain"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190622192322",
+    "entityTableName": "measure",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "SolrSysApi",
+    "applications": "*",
+    "microserviceName": "SolrSysApi"
+}

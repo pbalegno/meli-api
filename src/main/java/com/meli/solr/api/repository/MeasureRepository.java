@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
  * Spring Data  repository for the Measure entity.
  */
 @Repository
-public interface MeasureRepository extends JpaRepository<Measure, Long> {
+public interface MeasureRepository extends JpaRepository<Measure, Integer> {
 
 }

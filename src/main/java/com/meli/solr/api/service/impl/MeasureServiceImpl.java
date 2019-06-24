@@ -62,7 +62,7 @@ public class MeasureServiceImpl implements MeasureService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<Measure> findOne(Long id) {
+    public Optional<Measure> findOne(Integer id) {
         log.debug("Request to get Measure : {}", id);
         return measureRepository.findById(id);
     }
@@ -73,7 +73,7 @@ public class MeasureServiceImpl implements MeasureService {
      * @param id the id of the entity.
      */
     @Override
-    public void delete(Long id) {
+    public void delete(Integer id) {
         log.debug("Request to delete Measure : {}", id);
         measureRepository.deleteById(id);
     }

@@ -1,7 +1,6 @@
 package com.meli.solr.api.web.rest;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -20,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.meli.solr.api.domain.Location;
-import com.meli.solr.api.domain.enumeration.WeatherType;
 import com.meli.solr.api.service.LocationService;
-import com.meli.solr.api.service.SolrSysService;
 
 import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -36,13 +33,11 @@ public class LocationResource {
 
     private final Logger log = LoggerFactory.getLogger(LocationResource.class);
 
-    private final LocationService locationService;
-    
     @Autowired
-    private SolrSysService solrSysService;
-
- 
-    /**
+    private LocationService locationService;
+    
+  
+	/**
      * {@code GET  /locations} : get all the locations.
      *
      * @param pageable the pagination information.
@@ -69,22 +64,9 @@ public class LocationResource {
         return ResponseUtil.wrapOrNotFound(location);
     }
     
-    /**
-     * {@code GET  /locations/:id} : get the "id" location.
-     *
-     * @param id the id of the location to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the location, or with status {@code 404 (Not Found)}.
-     */
-    @GetMapping("/locations/seed")
-    public ResponseEntity<Map<WeatherType,Integer>> seeding() {
-        log.debug("REST request to seeding weather");
-        solrSysService.init();
-        return ResponseEntity.ok().body(solrSysService.getReport());
-    }
-    
     public LocationResource(LocationService locationService) {
-        this.locationService = locationService;
-    }
-
+		this.locationService = locationService;
+	}
+    
    
 }

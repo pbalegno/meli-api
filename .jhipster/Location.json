@@ -1,0 +1,29 @@
+{
+    "name": "Location",
+    "fields": [
+        {
+            "fieldName": "x",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "y",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "planet",
+            "fieldType": "Planet",
+            "fieldValues": "Ferengi,Betasoide,Vulcano"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20190622192321",
+    "entityTableName": "location",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "SolrSysApi",
+    "applications": "*",
+    "microserviceName": "SolrSysApi"
+}

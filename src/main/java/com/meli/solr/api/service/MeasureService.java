@@ -35,12 +35,12 @@ public interface MeasureService {
      * @param id the id of the entity.
      * @return the entity.
      */
-    Optional<Measure> findOne(Long id);
+    Optional<Measure> findOne(Integer id);
 
     /**
      * Delete the "id" measure.
      *
      * @param id the id of the entity.
      */
-    void delete(Long id);
+    void delete(Integer id);
 }

@@ -1,4 +1,4 @@
-package com.meli.solr.api.geo;
+package com.meli.solr.api.geometry;
 
 import org.springframework.data.geo.Point;
 import org.springframework.util.Assert;

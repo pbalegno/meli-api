@@ -154,7 +154,7 @@ jhipster:
     default-include-pattern: /api/.*
     title: SolrSysApi API
     description: SolrSysApi API documentation
-    version: 0.0.1
+    version: 1.0
     terms-of-service-url:
     contact-name: Lic. Pablo Balegno
     contact-url:

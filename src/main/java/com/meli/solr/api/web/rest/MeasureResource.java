@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -32,10 +33,11 @@ public class MeasureResource {
 
     private final Logger log = LoggerFactory.getLogger(MeasureResource.class);
 
-    private final MeasureService measureService;
+    @Autowired
+    private MeasureService measureService;
+    
 
-
-    /**
+	/**
      * {@code GET  /measures} : get all the measures.
      *
      * @param pageable the pagination information.
@@ -50,21 +52,22 @@ public class MeasureResource {
     }
 
     /**
-     * {@code GET  /measures/:id} : get the "id" measure.
+     * {@code GET  /measures/:day} : get the "id" measure.
      *
-     * @param id the id of the measure to retrieve.
+     * @param day the day of the measure to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the measure, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/measures/{id}")
-    public ResponseEntity<Measure> getMeasure(@PathVariable Long id) {
-        log.debug("REST request to get Measure : {}", id);
-        Optional<Measure> measure = measureService.findOne(id);
+    @GetMapping("/measures/{day}")
+    public ResponseEntity<Measure> getMeasure(@PathVariable Integer day) {
+        log.debug("REST request to get Measure for day: {}", day);
+        Optional<Measure> measure = measureService.findOne(day);
         return ResponseUtil.wrapOrNotFound(measure);
     }
-
+    
+    
     public MeasureResource(MeasureService measureService) {
-        this.measureService = measureService;
-    }
+    	this.measureService = measureService;
+	}
+    
 
-   
 }

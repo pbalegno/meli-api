@@ -7,13 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.meli.solr.api.domain.enumeration.WeatherType;
 
@@ -22,15 +17,12 @@ import com.meli.solr.api.domain.enumeration.WeatherType;
  */
 @Entity
 @Table(name = "measure")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Measure implements Serializable {
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class Measure extends AbstractAuditingEntity implements  Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Id 
     @Column(name = "day")
     private Integer day;
 
@@ -39,14 +31,6 @@ public class Measure implements Serializable {
     private WeatherType weather;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public Integer getDay() {
         return day;
     }
@@ -82,7 +66,7 @@ public class Measure implements Serializable {
         if (!(o instanceof Measure)) {
             return false;
         }
-        return id != null && id.equals(((Measure) o).id);
+        return day != null && day.equals(((Measure) o).day);
     }
 
     @Override
@@ -93,7 +77,6 @@ public class Measure implements Serializable {
     @Override
     public String toString() {
         return "Measure{" +
-            "id=" + getId() +
             ", day=" + getDay() +
             ", weather='" + getWeather() + "'" +
             "}";

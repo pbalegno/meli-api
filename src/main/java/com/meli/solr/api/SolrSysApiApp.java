@@ -1,9 +1,9 @@
 package com.meli.solr.api;
 
-import com.meli.solr.api.config.ApplicationProperties;
-import com.meli.solr.api.config.DefaultProfileUtil;
-
-import io.github.jhipster.config.JHipsterConstants;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.Arrays;
+import java.util.Collection;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -16,12 +16,13 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collection;
+import com.meli.solr.api.config.ApplicationProperties;
+import com.meli.solr.api.config.DefaultProfileUtil;
 
-@SpringBootApplication
+import io.github.jhipster.config.JHipsterConstants;
+import io.github.jhipster.config.apidoc.SwaggerAutoConfiguration;
+
+@SpringBootApplication(exclude = { SwaggerAutoConfiguration.class})
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @ComponentScan(basePackages = "com.meli.solr.api") 
 public class SolrSysApiApp implements InitializingBean {

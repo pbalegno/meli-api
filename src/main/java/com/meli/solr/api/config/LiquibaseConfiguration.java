@@ -1,20 +1,21 @@
 package com.meli.solr.api.config;
 
-import io.github.jhipster.config.JHipsterConstants;
-import io.github.jhipster.config.liquibase.AsyncSpringLiquibase;
-import liquibase.integration.spring.SpringLiquibase;
+import java.util.concurrent.Executor;
+
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
-import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 
-import javax.sql.DataSource;
-import java.util.concurrent.Executor;
+import io.github.jhipster.config.JHipsterConstants;
+import io.github.jhipster.config.liquibase.AsyncSpringLiquibase;
+import liquibase.integration.spring.SpringLiquibase;
 
 @Configuration
 public class LiquibaseConfiguration {
@@ -23,11 +24,9 @@ public class LiquibaseConfiguration {
 
     private final Environment env;
 
-    private final CacheManager cacheManager;
 
-    public LiquibaseConfiguration(Environment env, CacheManager cacheManager) {
+    public LiquibaseConfiguration(Environment env) {
         this.env = env;
-        this.cacheManager = cacheManager;
     }
 
     @Bean
