@@ -42,6 +42,8 @@
     "monitoring": "elk",
     "consoleOptions": [
       "curator"
-    ]
+    ],
+    "herokuAppName": "solr-sys-api",
+    "herokuDeployType": "jar"
   }
 }

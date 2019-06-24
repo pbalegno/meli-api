@@ -1,0 +1,26 @@
+entity Location {
+	x Double,
+	y Double,
+	planet Planet
+
+}
+
+entity Measure {
+    day Integer,
+    weather Weather
+}
+
+enum Weather {
+    Drought, OptimalTemperature, Rain, HeavyRain
+}
+
+enum Planet {
+   Ferengi,Betasoide,Vulcano
+}
+
+
+// Set service options to all except few
+service Measure,Location with serviceImpl
+
+paginate Measure,Location with pagination
+

@@ -84,7 +84,7 @@ For more information about Jib see [site Jib][]
     
 ## Deployment
 
-Donwload docker-compose.yml from [public Git repo][]
+Donwload docker-compose (azure.yml) from [public Git repo][]
     
 On local, create a folder "meli" and then, run:
 

@@ -1,9 +1,11 @@
 package com.meli.solr.api.client;
 
+import org.springframework.stereotype.Component;
+
 import com.meli.solr.api.security.SecurityUtils;
+
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.springframework.stereotype.Component;
 
 @Component
 public class UserFeignClientInterceptor implements RequestInterceptor {
