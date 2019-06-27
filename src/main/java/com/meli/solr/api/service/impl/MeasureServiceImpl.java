@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,12 +88,7 @@ public class MeasureServiceImpl implements MeasureService {
 	@Transactional(readOnly = true)
 	@Cacheable(REPORT_CACHE)
 	public Map<WeatherType, Long> getReport() {
-		 List<Object[]> m = measureRepository.getReport();
-		 Map<WeatherType, Long> maps = new HashMap<WeatherType, Long>();
-		 for (Object[] o : m) {
-			maps.put((WeatherType)o[0], (Long)o[1]);
-		 }
-		return maps;
+		return measureRepository.getReport().stream().collect(Collectors.toMap(x ->  (WeatherType)x[0], x-> (Long)x[1]));
 	}
 
 
