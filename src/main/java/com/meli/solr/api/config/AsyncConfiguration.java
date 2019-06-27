@@ -14,6 +14,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import com.meli.solr.api.client.SolrSysInitializer;
+
 import io.github.jhipster.async.ExceptionHandlingAsyncTaskExecutor;
 
 @Configuration
@@ -40,7 +42,12 @@ public class AsyncConfiguration implements AsyncConfigurer {
         executor.setThreadNamePrefix(taskExecutionProperties.getThreadNamePrefix());
         return new ExceptionHandlingAsyncTaskExecutor(executor);
     }
-
+    
+	@Bean
+	public SolrSysInitializer solrSysInitializer() {
+		return new SolrSysInitializer();
+	}
+    
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
         return new SimpleAsyncUncaughtExceptionHandler();

@@ -8,6 +8,6 @@ public interface SolrSysService {
 
 	void init();
 
-	Map<WeatherType, Integer> getReport();
+	Map<WeatherType, Long> getReport();
 
 }

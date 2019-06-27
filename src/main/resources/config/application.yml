@@ -94,7 +94,7 @@ spring:
     properties:
       hibernate.jdbc.time_zone: UTC
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
       naming:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
@@ -152,8 +152,8 @@ jhipster:
     from: SolrSysApi@localhost
   swagger:
     default-include-pattern: /api/.*
-    title: SolrSysApi API
-    description: SolrSysApi API documentation
+    title: SolrSys API
+    description: SolrSys API documentation
     version: 1.0
     terms-of-service-url:
     contact-name: Lic. Pablo Balegno

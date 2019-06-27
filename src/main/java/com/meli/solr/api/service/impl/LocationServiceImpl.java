@@ -1,17 +1,18 @@
 package com.meli.solr.api.service.impl;
 
-import com.meli.solr.api.service.LocationService;
-import com.meli.solr.api.domain.Location;
-import com.meli.solr.api.repository.LocationRepository;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import com.meli.solr.api.domain.Location;
+import com.meli.solr.api.domain.enumeration.PlanetType;
+import com.meli.solr.api.repository.LocationRepository;
+import com.meli.solr.api.service.LocationService;
 
 /**
  * Service Implementation for managing {@link Location}.
@@ -77,4 +78,11 @@ public class LocationServiceImpl implements LocationService {
         log.debug("Request to delete Location : {}", id);
         locationRepository.deleteById(id);
     }
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Location> findAllByPlanet(Pageable pageable, PlanetType planet) {
+		 log.debug("Request to findAllByPlanet");
+	     return locationRepository.findAllByPlanetEquals(planet, pageable);
+	}
 }

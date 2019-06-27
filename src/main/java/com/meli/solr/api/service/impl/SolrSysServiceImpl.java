@@ -1,6 +1,8 @@
 package com.meli.solr.api.service.impl;
 
-import java.util.HashMap;
+import static com.meli.solr.api.domain.Constants.DAYS;
+import static com.meli.solr.api.domain.Constants.YEARS;
+
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -17,8 +19,6 @@ import com.meli.solr.api.service.ForecastService;
 import com.meli.solr.api.service.MeasureService;
 import com.meli.solr.api.service.SolrSysService;
 
-import static com.meli.solr.api.domain.Constants.*;
-
 @Service
 public class SolrSysServiceImpl implements SolrSysService {
 
@@ -29,42 +29,31 @@ public class SolrSysServiceImpl implements SolrSysService {
 	private ForecastService forecastService;
 
 	private AtomicBoolean initialized = new AtomicBoolean(false);
-	private Map<WeatherType, Integer> report = null;	
 
 	private final Logger log = LoggerFactory.getLogger(SolrSysServiceImpl.class);
 
+	
 
+	
 	@Async("taskExecutor")
 	public void init() {
-		if (initialized.compareAndSet(false, true)) {
-			initialize();
-		}
+		initialize();
 	}
 
 	private void initialize() {
-		StopWatch watch = new StopWatch();
-		watch.start();
-		initializeReport();
-		seedingBD();
-		log.debug("Seeding total time " + watch.getTotalTimeSeconds() + " seconds.");
-		watch.stop();
-		initialized.set(false);
-	}
-
-	private void initializeReport() {
-		log.debug("initialize report...");
-		report = new HashMap<WeatherType, Integer>();
-		report.put(WeatherType.Drought, 0);
-		report.put(WeatherType.OptimalTemperature, 0);
-		report.put(WeatherType.HeavyRain, 0);
-		report.put(WeatherType.Rain, 0);
-		report.put(WeatherType.Other, 0);
+		if (initialized.compareAndSet(false, true)) {
+			StopWatch watch = new StopWatch();
+			watch.start();
+			seedingBD();
+			watch.stop();
+			log.debug("Seeding total time " + watch.getTotalTimeSeconds() + " seconds.");
+			initialized.set(false);
+		}
 	}
 
 	private void seedingBD() {
-		for (int day = 1; day <= YEARS * DAYS; day++) {
-			Measure measure = saveMeasure(day);
-			updateReport(measure);
+		for (int day = 1; day <= YEARS * DAYS; day++) {			
+			saveMeasure(day);
 		}
 	}
 
@@ -72,11 +61,6 @@ public class SolrSysServiceImpl implements SolrSysService {
 		Measure measure = forecastService.getMeasure(day);
 		measureService.save(measure);
 		return measure;
-	}
-
-	private void updateReport(Measure measure) {
-		Integer count = report.get(measure.getWeather());
-		report.put(measure.getWeather(), count + 1);
 	}
 
 	public AtomicBoolean getInitialized() {
@@ -87,8 +71,11 @@ public class SolrSysServiceImpl implements SolrSysService {
 		this.initialized = initialized;
 	}
 
-	public Map<WeatherType, Integer> getReport() {
-		return report;
+	public Map<WeatherType, Long> getReport() {
+		if (!initialized.get()) {
+			return measureService.getReport();
+		}	
+		return null;
 	}
 
 }

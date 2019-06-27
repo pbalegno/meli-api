@@ -10,18 +10,16 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.meli.solr.api.domain.Location;
+import com.meli.solr.api.domain.enumeration.PlanetType;
 import com.meli.solr.api.service.LocationService;
 
-import io.github.jhipster.web.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 
 /**
@@ -44,10 +42,11 @@ public class LocationResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of locations in body.
      */
     @GetMapping("/locations")
-    public ResponseEntity<List<Location>> getAllLocations(Pageable pageable, @RequestParam MultiValueMap<String, String> queryParams, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<List<Location>> getAllLocations(Pageable pageable, @RequestParam (value = "planet") PlanetType planet) {
         log.debug("REST request to get a page of Locations");
-        Page<Location> page = locationService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(uriBuilder.queryParams(queryParams), page);
+        Page<Location> page = locationService.findAllByPlanet(pageable,planet);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("x-elements", page.getTotalElements()+"");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -63,6 +62,8 @@ public class LocationResource {
         Optional<Location> location = locationService.findOne(id);
         return ResponseUtil.wrapOrNotFound(location);
     }
+    
+    
     
     public LocationResource(LocationService locationService) {
 		this.locationService = locationService;

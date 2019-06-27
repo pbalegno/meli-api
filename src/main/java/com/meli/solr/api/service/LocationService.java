@@ -1,6 +1,7 @@
 package com.meli.solr.api.service;
 
 import com.meli.solr.api.domain.Location;
+import com.meli.solr.api.domain.enumeration.PlanetType;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -43,4 +44,6 @@ public interface LocationService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+	Page<Location> findAllByPlanet(Pageable pageable, PlanetType planet);
 }

@@ -10,18 +10,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
 
-import com.meli.solr.api.security.jwt.TokenProvider;
-
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @Import(SecurityProblemSupport.class)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final TokenProvider tokenProvider;
     private final SecurityProblemSupport problemSupport;
 
-    public SecurityConfiguration(TokenProvider tokenProvider, SecurityProblemSupport problemSupport) {
-        this.tokenProvider = tokenProvider;
+    public SecurityConfiguration(SecurityProblemSupport problemSupport) {
         this.problemSupport = problemSupport;
     }
 
@@ -51,16 +47,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
             .authorizeRequests()
-//            .antMatchers("/api/authenticate").permitAll()
-//            .antMatchers("/api/**").authenticated()
             .antMatchers("/api/**").permitAll();
-//        .and()
-//            .apply(securityConfigurerAdapter());
         // @formatter:on
     }
 
-//  Jhipster defaul JWT
-//    private JWTConfigurer securityConfigurerAdapter() {
-//        return new JWTConfigurer(tokenProvider);
-//    }
 }

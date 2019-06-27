@@ -1,15 +1,20 @@
 package com.meli.solr.api.service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.meli.solr.api.domain.Measure;
+import com.meli.solr.api.domain.enumeration.WeatherType;
 import com.meli.solr.api.repository.MeasureRepository;
 import com.meli.solr.api.service.MeasureService;
 
@@ -77,6 +82,18 @@ public class MeasureServiceImpl implements MeasureService {
         log.debug("Request to delete Measure : {}", id);
         measureRepository.deleteById(id);
     }
+
+	@Override
+	@Transactional(readOnly = true)
+	@Cacheable(REPORT_CACHE)
+	public Map<WeatherType, Long> getReport() {
+		 List<Object[]> m = measureRepository.getReport();
+		 Map<WeatherType, Long> maps = new HashMap<WeatherType, Long>();
+		 for (Object[] o : m) {
+			maps.put((WeatherType)o[0], (Long)o[1]);
+		 }
+		return maps;
+	}
 
 
 }

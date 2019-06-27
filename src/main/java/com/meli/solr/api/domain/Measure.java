@@ -10,6 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.meli.solr.api.domain.enumeration.WeatherType;
 
 /**
@@ -17,7 +20,7 @@ import com.meli.solr.api.domain.enumeration.WeatherType;
  */
 @Entity
 @Table(name = "measure")
-//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Measure extends AbstractAuditingEntity implements  Serializable {
 
     private static final long serialVersionUID = 1L;
