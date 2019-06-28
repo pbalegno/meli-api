@@ -9,7 +9,7 @@ services:
       - 'SPRING_DATASOURCE_URL=jdbc:mysql://solrsysapi-mysql:3306/solrsysapi?useUnicode=true&characterEncoding=utf8&useSSL=false'
       - APP_SLEEP=10
     ports:
-      - "8888:8888"
+      - "80:8888"
   solrsysapi-mysql:
     image: 'mysql:5.7.26'
     volumes:
