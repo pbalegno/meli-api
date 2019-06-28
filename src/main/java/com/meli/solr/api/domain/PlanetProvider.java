@@ -11,26 +11,30 @@ public class PlanetProvider {
 
 	private PlanetType planet;
 
-	
-	public PlanetProvider() {
-	}
 	public PlanetProvider(PlanetType planet) {
 		this.planet = planet;
 	}
 
 	// https://www.fisicalab.com/apartado/magnitudes-angulares#posicion_angular
+    // https://www.universoformulas.com/fisica/cinematica/posicion-movimiento-circular/
 	/**
 	 * @param Integer day
 	 * @return the angle of the planet in radians
 	 */
+	
 	public double getAngularPosition(Integer day) {
+		/*que arrancan alineados a los 0°*/
+	    //los planetas comienzan en un ángulo de 0 grados respecto del eje X.
 		double degree = (day * getPlanet().getAngularSpeed()) % DEGREE;
-		// If we don't check for degree > 0, then when the degree is 0 and
-		// the direction is clockwise we end up with 360 degrees.
-		if (getPlanet().getOrbitDirection() == DirectionType.ClockWise && degree > 0) {
+		if (isClockWise() && degree > 0) {
 			degree = DEGREE - degree;
-		}//(180 * 1)
+		}
 		return Math.toRadians(degree);
+	}
+	
+	
+	private boolean isClockWise() {
+		return getPlanet().getOrbitDirection() == DirectionType.ClockWise;
 	}
 
 	/**
