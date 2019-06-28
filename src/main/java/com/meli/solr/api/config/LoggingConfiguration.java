@@ -42,9 +42,7 @@ public class LoggingConfiguration {
 
     private static final String CONSOLE_APPENDER_NAME = "CONSOLE";
 
-    private static final String LOGSTASH_APPENDER_NAME = "LOGSTASH";
 
-    private static final String ASYNC_LOGSTASH_APPENDER_NAME = "ASYNC_LOGSTASH";
 
     private final Logger log = LoggerFactory.getLogger(LoggingConfiguration.class);
 
@@ -64,14 +62,8 @@ public class LoggingConfiguration {
         if (this.jHipsterProperties.getLogging().isUseJsonFormat()) {
             addJsonConsoleAppender(context);
         }
-        if (this.jHipsterProperties.getLogging().getLogstash().isEnabled()) {
-            addLogstashTcpSocketAppender(context);
-        }
         if (this.jHipsterProperties.getLogging().isUseJsonFormat() || this.jHipsterProperties.getLogging().getLogstash().isEnabled()) {
             addContextListener(context);
-        }
-        if (this.jHipsterProperties.getMetrics().getLogs().isEnabled()) {
-            setMetricsMarkerLogbackFilter(context);
         }
     }
 
@@ -89,27 +81,7 @@ public class LoggingConfiguration {
         context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME).addAppender(consoleAppender);
     }
 
-    private void addLogstashTcpSocketAppender(LoggerContext context) {
-        log.info("Initializing Logstash logging");
-
-        // More documentation is available at: https://github.com/logstash/logstash-logback-encoder
-        LogstashTcpSocketAppender logstashAppender = new LogstashTcpSocketAppender();
-        logstashAppender.addDestinations(new InetSocketAddress(this.jHipsterProperties.getLogging().getLogstash().getHost(), this.jHipsterProperties.getLogging().getLogstash().getPort()));
-        logstashAppender.setContext(context);
-        logstashAppender.setEncoder(logstashEncoder());
-        logstashAppender.setName(LOGSTASH_APPENDER_NAME);
-        logstashAppender.start();
-
-        // Wrap the appender in an Async appender for performance
-        AsyncAppender asyncLogstashAppender = new AsyncAppender();
-        asyncLogstashAppender.setContext(context);
-        asyncLogstashAppender.setName(ASYNC_LOGSTASH_APPENDER_NAME);
-        asyncLogstashAppender.setQueueSize(this.jHipsterProperties.getLogging().getLogstash().getQueueSize());
-        asyncLogstashAppender.addAppender(logstashAppender);
-        asyncLogstashAppender.start();
-
-        context.getLogger(ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME).addAppender(asyncLogstashAppender);
-    }
+  
 
     private LoggingEventCompositeJsonEncoder compositeJsonEncoder(LoggerContext context) {
         final LoggingEventCompositeJsonEncoder compositeJsonEncoder = new LoggingEventCompositeJsonEncoder();
@@ -189,33 +161,8 @@ public class LoggingConfiguration {
         context.addListener(loggerContextListener);
     }
 
-    // Configure a log filter to remove "metrics" logs from all appenders except the "LOGSTASH" appender
-    private void setMetricsMarkerLogbackFilter(LoggerContext context) {
-        log.info("Filtering metrics logs from all appenders except the {} appender", LOGSTASH_APPENDER_NAME);
-        OnMarkerEvaluator onMarkerMetricsEvaluator = new OnMarkerEvaluator();
-        onMarkerMetricsEvaluator.setContext(context);
-        onMarkerMetricsEvaluator.addMarker("metrics");
-        onMarkerMetricsEvaluator.start();
-        EvaluatorFilter<ILoggingEvent> metricsFilter = new EvaluatorFilter<>();
-        metricsFilter.setContext(context);
-        metricsFilter.setEvaluator(onMarkerMetricsEvaluator);
-        metricsFilter.setOnMatch(FilterReply.DENY);
-        metricsFilter.start();
-
-        context.getLoggerList().forEach((logger) -> {
-            for (Iterator<Appender<ILoggingEvent>> it = logger.iteratorForAppenders(); it.hasNext();) {
-                Appender<ILoggingEvent> appender = it.next();
-                if (!appender.getName().equals(ASYNC_LOGSTASH_APPENDER_NAME)
-                        && !(appender.getName().equals(CONSOLE_APPENDER_NAME) && this.jHipsterProperties.getLogging().isUseJsonFormat())) {
-                    log.debug("Filter metrics logs from the {} appender", appender.getName());
-                    appender.setContext(context);
-                    appender.addFilter(metricsFilter);
-                    appender.start();
-                }
-            }
-        });
-    }
-
+  
+    
     /**
      * Logback configuration is achieved by configuration file and API.
      * When configuration file change is detected, the configuration is reset.
@@ -238,9 +185,7 @@ public class LoggingConfiguration {
             if (this.jHipsterProperties.getLogging().isUseJsonFormat()) {
                 addJsonConsoleAppender(context);
             }
-            if (this.jHipsterProperties.getLogging().getLogstash().isEnabled()) {
-                addLogstashTcpSocketAppender(context);
-            }
+
         }
 
         @Override
@@ -248,9 +193,7 @@ public class LoggingConfiguration {
             if (this.jHipsterProperties.getLogging().isUseJsonFormat()) {
                 addJsonConsoleAppender(context);
             }
-            if (this.jHipsterProperties.getLogging().getLogstash().isEnabled()) {
-                addLogstashTcpSocketAppender(context);
-            }
+           
         }
 
         @Override

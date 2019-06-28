@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -23,8 +23,8 @@ import com.meli.solr.api.service.SolrSysService;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.apidoc.SwaggerAutoConfiguration;
 
-@SpringBootApplication(exclude = { SwaggerAutoConfiguration.class})
-@EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
+@SpringBootApplication(exclude = {LiquibaseAutoConfiguration.class, SwaggerAutoConfiguration.class})
+@EnableConfigurationProperties(ApplicationProperties.class)
 @ComponentScan(basePackages = "com.meli.solr.api") 
 public class SolrSysApiApp implements InitializingBean {
 
@@ -72,9 +72,9 @@ public class SolrSysApiApp implements InitializingBean {
 
     private static void logApplicationStartup(Environment env) {
         String protocol = "http";
-        if (env.getProperty("server.ssl.key-store") != null) {
-            protocol = "https";
-        }
+//        if (env.getProperty("server.ssl.key-store") != null) {
+//            protocol = "https";
+//        }
         String serverPort = env.getProperty("server.port");
         String contextPath = env.getProperty("server.servlet.context-path");
         if (StringUtils.isBlank(contextPath)) {

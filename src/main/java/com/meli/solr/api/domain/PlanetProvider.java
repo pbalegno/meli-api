@@ -29,7 +29,7 @@ public class PlanetProvider {
 		// the direction is clockwise we end up with 360 degrees.
 		if (getPlanet().getOrbitDirection() == DirectionType.ClockWise && degree > 0) {
 			degree = DEGREE - degree;
-		}
+		}//(180 * 1)
 		return Math.toRadians(degree);
 	}
 

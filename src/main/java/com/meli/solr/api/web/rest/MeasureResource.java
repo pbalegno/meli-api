@@ -48,7 +48,12 @@ public class MeasureResource {
     @GetMapping("/measures")
     public ResponseEntity<List<Measure>> getAllMeasures(Pageable pageable,@RequestParam (value = "weather",required = false) WeatherType weather) {
         log.debug("REST request to get a page of Measures");
-        Page<Measure> page = measureService.findAllByWeather(pageable,weather);
+        Page<Measure> page = null;
+        if(weather != null) {
+        	page = measureService.findAllByWeather(pageable,weather);
+        }else {
+        	page = measureService.findAll(pageable);
+        }
         HttpHeaders headers = new HttpHeaders();
         headers.add("x-elements", page.getTotalElements()+"");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
