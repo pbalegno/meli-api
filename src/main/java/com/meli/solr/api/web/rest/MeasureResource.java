@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,10 +46,12 @@ public class MeasureResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of measures in body.
      */
     @GetMapping("/measures")
-    public ResponseEntity<List<Measure>> getAllMeasures(Pageable pageable) {
+    public ResponseEntity<List<Measure>> getAllMeasures(Pageable pageable,@RequestParam (value = "weather",required = false) WeatherType weather) {
         log.debug("REST request to get a page of Measures");
-        Page<Measure> page = measureService.findAll(pageable);
-        return ResponseEntity.ok().body(page.getContent());
+        Page<Measure> page = measureService.findAllByWeather(pageable,weather);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("x-elements", page.getTotalElements()+"");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.meli.solr.api.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,6 +17,7 @@ import com.meli.solr.api.domain.Measure;
 import com.meli.solr.api.domain.enumeration.WeatherType;
 import com.meli.solr.api.repository.MeasureRepository;
 import com.meli.solr.api.service.MeasureService;
+
 
 /**
  * Service Implementation for managing {@link Measure}.
@@ -88,7 +88,13 @@ public class MeasureServiceImpl implements MeasureService {
 	@Transactional(readOnly = true)
 	@Cacheable(REPORT_CACHE)
 	public Map<WeatherType, Long> getReport() {
-		return measureRepository.getReport().stream().collect(Collectors.toMap(x ->  (WeatherType)x[0], x-> (Long)x[1]));
+		List<Object[]> report = measureRepository.getReport();
+		return report.stream().collect(Collectors.toMap(x -> (WeatherType)x[0], x-> (Long)x[1]));
+	}
+
+	@Override
+	public Page<Measure> findAllByWeather(Pageable pageable, WeatherType weather) {
+		return measureRepository.findAllByWeatherEquals(pageable,weather);
 	}
 
 

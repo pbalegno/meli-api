@@ -49,4 +49,6 @@ public interface MeasureService {
     void delete(Integer id);
 
 	Map<WeatherType, Long> getReport();
+
+	Page<Measure> findAllByWeather(Pageable pageable, WeatherType weather);
 }

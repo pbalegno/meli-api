@@ -4,7 +4,7 @@ import org.springframework.data.geo.Point;
 import org.springframework.util.Assert;
 
 
-public abstract class Shape {
+public abstract class Shape implements IShape {
 	
 	private Point pA, pB, pC;
 

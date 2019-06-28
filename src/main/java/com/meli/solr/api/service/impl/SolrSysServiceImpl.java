@@ -13,9 +13,13 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
 
+import com.meli.solr.api.domain.Location;
 import com.meli.solr.api.domain.Measure;
+import com.meli.solr.api.domain.PlanetProvider;
+import com.meli.solr.api.domain.PlanetSupplier;
 import com.meli.solr.api.domain.enumeration.WeatherType;
 import com.meli.solr.api.service.ForecastService;
+import com.meli.solr.api.service.LocationService;
 import com.meli.solr.api.service.MeasureService;
 import com.meli.solr.api.service.SolrSysService;
 
@@ -24,7 +28,8 @@ public class SolrSysServiceImpl implements SolrSysService {
 
 	@Autowired
 	private MeasureService measureService;
-
+	@Autowired
+	private LocationService locationService;
 	@Autowired
 	private ForecastService forecastService;
 
@@ -32,9 +37,6 @@ public class SolrSysServiceImpl implements SolrSysService {
 
 	private final Logger log = LoggerFactory.getLogger(SolrSysServiceImpl.class);
 
-	
-
-	
 	@Async("taskExecutor")
 	public void init() {
 		initialize();
@@ -52,9 +54,22 @@ public class SolrSysServiceImpl implements SolrSysService {
 	}
 
 	private void seedingBD() {
-		for (int day = 1; day <= YEARS * DAYS; day++) {			
+		for (int day = 1; day <= YEARS * DAYS; day++) {
+			saveLocations(day);
 			saveMeasure(day);
 		}
+	}
+
+	private void saveLocations(int day) {
+		PlanetSupplier.getPlanets().stream().forEach(p -> locationService.save(createLocation(p, day)));
+	}
+
+	private Location createLocation(PlanetProvider planet, Integer day) {
+		Location location = new Location();
+		location.setPlanet(planet.getPlanet());
+		location.setX(planet.getPoint(day).getX());
+		location.setY(planet.getPoint(day).getY());
+		return location;
 	}
 
 	private Measure saveMeasure(int day) {
@@ -74,7 +89,7 @@ public class SolrSysServiceImpl implements SolrSysService {
 	public Map<WeatherType, Long> getReport() {
 		if (!initialized.get()) {
 			return measureService.getReport();
-		}	
+		}
 		return null;
 	}
 

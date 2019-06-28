@@ -1,6 +1,6 @@
 package com.meli.solr.api.geometry;
 
-import static com.meli.solr.api.geometry.GeoUtils.*;
+import static com.meli.solr.api.geometry.GeoUtils.distance;
 
 import org.springframework.data.geo.Point;
 
@@ -25,6 +25,16 @@ public class Line extends Shape {
 		double AB = distance(getPointA(), getPointB());
 		double BC = distance(getPointB(), getPointC());
 		return AB + BC;
-	} 
+	}
+
+	@Override
+	public boolean isInside(Point point) {
+		return false;
+	}
+
+	@Override
+	public double getPerimeter() {
+		return 0;
+	}
 
 }

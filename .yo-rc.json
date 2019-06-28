@@ -39,7 +39,7 @@
     ],
     "directoryPath": "../",
     "gatewayType": "traefik",
-    "monitoring": "elk",
+    "monitoring": "no",
     "consoleOptions": [
       "curator"
     ],

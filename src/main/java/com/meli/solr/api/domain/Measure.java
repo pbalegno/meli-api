@@ -80,7 +80,7 @@ public class Measure extends AbstractAuditingEntity implements  Serializable {
     @Override
     public String toString() {
         return "Measure{" +
-            ", day=" + getDay() +
+            " day=" + getDay() +
             ", weather='" + getWeather() + "'" +
             "}";
     }
