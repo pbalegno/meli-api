@@ -74,7 +74,7 @@ public class MeasureResource {
     
 
     /**
-     * {@code GET  /weather/getReport}
+     * {@code GET  /measures/getReport}
      * Report by Weather, you can see preliminary totals 
      */
     @GetMapping("/measures/getReport")
