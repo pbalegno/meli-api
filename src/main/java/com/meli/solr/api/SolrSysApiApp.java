@@ -71,9 +71,7 @@ public class SolrSysApiApp implements InitializingBean {
 
     private static void logApplicationStartup(Environment env) {
         String protocol = "http";
-//        if (env.getProperty("server.ssl.key-store") != null) {
-//            protocol = "https";
-//        }
+
         String serverPort = env.getProperty("server.port");
         String contextPath = env.getProperty("server.servlet.context-path");
         if (StringUtils.isBlank(contextPath)) {
