@@ -92,5 +92,5 @@ On local, create a folder "meli" and then, run:
     
 [site Jib]: https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin
 
-[public Git repo]: https://github.com/pbalegno/meli-api/blob/master/src/main/docker/docker-compose.yml
+[public Git repo]: https://github.com/pbalegno/meli-api/blob/master/src/main/docker/azure.yml
    
