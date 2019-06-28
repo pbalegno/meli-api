@@ -1,11 +1,8 @@
 # SolrSysApi
 
-This is a "microservice" application intended to be part of a microservice architecture.
-
-
 ## Development
 
-To start your application in the dev profile, simply run:
+To start your application in the dev profile, run:
 
     ./mvnw
 

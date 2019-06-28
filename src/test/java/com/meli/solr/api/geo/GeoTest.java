@@ -12,7 +12,6 @@ import com.meli.solr.api.geometry.ShapeFactory;
 
 public class GeoTest {
 
-
 	@Test
 	public void testAreaTriangle() {
 		List<Point> points = new ArrayList<>(3);

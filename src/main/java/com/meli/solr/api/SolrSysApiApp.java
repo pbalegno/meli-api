@@ -11,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.env.Environment;
@@ -23,7 +22,7 @@ import com.meli.solr.api.service.SolrSysService;
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.apidoc.SwaggerAutoConfiguration;
 
-@SpringBootApplication(exclude = {LiquibaseAutoConfiguration.class, SwaggerAutoConfiguration.class})
+@SpringBootApplication(exclude = {SwaggerAutoConfiguration.class})
 @EnableConfigurationProperties(ApplicationProperties.class)
 @ComponentScan(basePackages = "com.meli.solr.api") 
 public class SolrSysApiApp implements InitializingBean {

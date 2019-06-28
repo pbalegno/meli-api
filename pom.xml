@@ -216,10 +216,10 @@
 <!--             <groupId>org.liquibase</groupId> -->
 <!--             <artifactId>liquibase-core</artifactId> -->
 <!--         </dependency> -->
-        <dependency>
-            <groupId>net.logstash.logback</groupId>
-            <artifactId>logstash-logback-encoder</artifactId>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>net.logstash.logback</groupId> -->
+<!--             <artifactId>logstash-logback-encoder</artifactId> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -326,26 +326,26 @@
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cloud-connectors</artifactId>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.springframework.cloud</groupId> -->
+<!--             <artifactId>spring-cloud-starter-openfeign</artifactId> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>org.springframework.boot</groupId> -->
+<!--             <artifactId>spring-boot-starter-cloud-connectors</artifactId> -->
+<!--         </dependency> -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-data</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.dropwizard.metrics</groupId>
-            <artifactId>metrics-core</artifactId>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>io.micrometer</groupId> -->
+<!--             <artifactId>micrometer-registry-prometheus</artifactId> -->
+<!--         </dependency> -->
+<!--         <dependency> -->
+<!--             <groupId>io.dropwizard.metrics</groupId> -->
+<!--             <artifactId>metrics-core</artifactId> -->
+<!--         </dependency> -->
         <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
